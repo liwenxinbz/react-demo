@@ -13,8 +13,6 @@ axios.interceptors.request.use(function (config) {
 //拦截响应
 axios.interceptors.response.use(function (config) {
     console.log(config, 'response');
-    setTimeout(function () {
-       Toast.hide();
-    }, 300);
+    Toast.hide();
     return config;
 });
