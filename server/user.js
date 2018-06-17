@@ -51,15 +51,19 @@ Router.post('/update', function (req, res) {
         return res.json({code: 1});
     }
     const body = req.body;
-    User.findByIdAndUpdate({_id: userid}, body, function (err, doc) {
+    User.findByIdAndUpdate(userid, body, function (err, doc) {
         if (err) {
             return res.json({code: 1, msg: '后端出错了'});
         }
         if (!doc) {
             return res.json({code: 1, msg: '用户名不存在'});
         }
-
-        return res.json({code: 0, data: doc});
+        const body = req.body
+        const data = Object.assign({}, {
+            type: doc.type,
+            user: doc.user
+        }, body);
+        return res.json({code: 0, data});
     })
 });
 
@@ -80,7 +84,7 @@ Router.post('/login', function (req, res) {
         const data = Object.assign({}, {
             type: doc.type,
             user: doc.user
-        }, body);
+        }, res.body);
 
         return res.json({code: 0, data});
     })
