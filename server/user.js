@@ -1,3 +1,4 @@
+
 const express = require('express');
 
 const Router = express.Router();
@@ -23,12 +24,24 @@ Router.post('/register', function (req, res) {
         if (doc) {
             return res.json({code: 1, msg: '用户名重复'});
         }
-        User.create({user, pwd: md5PWd(pwd), type}, function (e, d) {
+
+        // create 方法不能返回用户id 所以用save方法
+        const userModel = new User({user, type, pwd: md5PWd(pwd)});
+
+        userModel.save(function (e, d) {
             if (e) {
                 return res.json({code: 1, msg: '后端出错了'});
             }
-            return res.json({code: 0, msg: '注册成功'});
-        })
+            const {user, type , _id} = d;
+            res.cookie('user', _id);
+            return res.json({code: 0, data: {user, type, _id}, msg: '注册成功'});
+        });
+        // User.create({user, pwd: md5PWd(pwd), type}, function (e, d) {
+        //     if (e) {
+        //         return res.json({code: 1, msg: '后端出错了'});
+        //     }
+        //     return res.json({code: 0, msg: '注册成功'});
+        // })
     })
 });
 

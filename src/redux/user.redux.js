@@ -7,6 +7,7 @@ import {getRedirectPath} from '../util';
 const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 const ERROR_MSG = 'ERROR_MSG';
+const LOAD_DATA = 'LOAD_DATA';
 
 // reducer
 
@@ -18,6 +19,18 @@ const initState = {
     type: '',
     msg: '',
 };
+
+function errorMsg(msg) {
+    return {msg, type: ERROR_MSG};
+}
+
+function loginSuccess(data) {
+    return {type: LOGIN_SUCCESS, payload: data};
+}
+
+function registerSuccess(data) {
+    return {type: REGISTER_SUCCESS, payload: data}
+}
 
 export function user(state = initState, action) {
     switch (action.type) {
@@ -40,13 +53,18 @@ export function user(state = initState, action) {
                 redirectTo: getRedirectPath(action.payload),
                 ...action.payload
             };
+        case LOAD_DATA:
+            return {
+                ...state,
+                ...action.payload
+            };
         default:
             return state;
     }
 }
 
-function errorMsg(msg) {
-    return {msg, type: ERROR_MSG};
+export function loadData(userinfo) {
+    return {type: LOAD_DATA, payload: userinfo}
 }
 
 export function login({user, pwd, type}) {
@@ -60,14 +78,6 @@ export function login({user, pwd, type}) {
             }
         });
     }
-}
-
-function loginSuccess(data) {
-    return {type: LOGIN_SUCCESS, payload: data};
-}
-
-function registerSuccess(data) {
-    return {type: REGISTER_SUCCESS, payload: data}
 }
 
 export function register({user, pwd, repeatpwd, type}) {
