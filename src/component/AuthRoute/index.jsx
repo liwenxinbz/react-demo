@@ -29,11 +29,7 @@ class AuthRoute extends React.Component {
     }
 
     render() {
-        return (
-            <div>
-                11
-            </div>
-        );
+        return null;
     }
 }
 

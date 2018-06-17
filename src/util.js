@@ -1,4 +1,4 @@
-export function getRedirectPath(type, avatar) {
+export function getRedirectPath({type, avatar}) {
 //    根据用户信息  返回跳转地址
 
     console.log(type, avatar, 1);
