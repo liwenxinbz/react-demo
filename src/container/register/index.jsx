@@ -1,4 +1,5 @@
 import React from 'react';
+import {Redirect} from 'react-router-dom';
 import {List, InputItem, WingBlank, WhiteSpace, Button, Radio} from 'antd-mobile';
 import {connect} from 'react-redux';
 import {register} from '../../redux/user.redux';
@@ -42,6 +43,11 @@ class Login extends React.Component {
         console.log(this.state);
         return (
             <div>
+                {
+                    this.props.redirectTo ? (
+                        <Redirect to={this.props.redirectTo}/>
+                    ) : null
+                }
                 <Logo/>
                 <h2>注册页面</h2>
                 {this.props.msg ? <p>{this.props.msg}</p> : null}

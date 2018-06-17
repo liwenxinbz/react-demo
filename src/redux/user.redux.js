@@ -1,7 +1,7 @@
 
 
 import axios from 'axios';
-
+import {getRedirectPath} from '../util';
 
 
 const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
@@ -10,6 +10,7 @@ const ERROR_MSG = 'ERROR_MSG';
 // reducer
 
 const initState = {
+    redirectTo: '',
     isAuth: false,
     user: '',
     pwd: '',
@@ -18,9 +19,13 @@ const initState = {
 };
 
 export function user(state = initState, action) {
+    console.log(action.payload);
     switch (action.type) {
         case REGISTER_SUCCESS:
-            return {...state, isAuth: true, ...action.payload};
+            return {
+                ...state, isAuth: true,
+                redirectTo: getRedirectPath(action.payload.type, action.payload.avatar),
+                ...action.payload};
         case ERROR_MSG:
             return {...state, isAuth: false, msg: action.msg};
         default:

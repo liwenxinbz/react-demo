@@ -13,7 +13,7 @@ Router.get('/list', function (req, res) {
 });
 
 Router.post('/register', function (req, res) {
-    const {user, pwd, type} = req.body.body;
+    const {user, pwd, type} = req.body;
 
     User.findOne({user: user}, function (err, doc) {
         if (doc) {
