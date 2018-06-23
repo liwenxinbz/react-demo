@@ -5,11 +5,7 @@ import {connect} from 'react-redux';
 
 import NavLinkBar from '../NavLinkBar';
 import Boss from '../../component/Boss';
-
-
-function Genius() {
-  return <h2>牛人</h2>;
-}
+import Genius from '../../component/Genius';
 
 function User() {
   return <h2>个人中心</h2>;

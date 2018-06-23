@@ -84,7 +84,8 @@ Router.post('/login', function (req, res) {
 
         const data = Object.assign({}, {
             type: doc.type,
-            user: doc.user
+            user: doc.user,
+            avatar: doc.avatar
         }, res.body);
 
         return res.json({code: 0, data});

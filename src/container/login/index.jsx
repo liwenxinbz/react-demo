@@ -32,7 +32,6 @@ class Login extends React.Component {
     }
 
     handleLogin = () => {
-        // const {user, pwd} = this.state;
         this.props.login(this.state);
     };
 
