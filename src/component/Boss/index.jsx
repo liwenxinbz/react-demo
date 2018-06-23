@@ -1,10 +1,15 @@
 import React from 'react';
 import axios from 'axios';
+import {connect} from 'react-redux';
 
+import {getUserList} from '../../redux/chatuser.redux';
 import UserCard from '../../component/UserCard';
 
 
-
+@connect(
+  state => state.chatUser,
+  {getUserList}
+)
 class Boss extends React.Component {
 
   static propTypes = {};
@@ -17,19 +22,11 @@ class Boss extends React.Component {
   }
 
   componentDidMount(){
-    axios.get('/user/list?type=genius').then((res) => {
-
-      console.log(res);
-      if (res.data.code === 0) {
-        this.setState({
-          data: res.data.data
-        })
-      }
-    });
+    this.props.getUserList('genius');
   }
 
   render() {
-    console.log(this.state.data);
+    console.log(this.props);
     return <UserCard userlist={this.props.userlist}/>
 
   }
