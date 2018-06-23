@@ -55,7 +55,6 @@ export function user(state = initState, action) {
 
 export function updateInfo(data) {
 
-    console.log(data, 111);
     return dispatch=> {
         axios.post('/user/update', data).then((res) => {
             if (res.status === 200 && res.data.code === 0) {

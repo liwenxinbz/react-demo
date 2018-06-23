@@ -10,9 +10,11 @@ import AuthRoute from './component/AuthRoute';
 import BossInfo from './container/BossInfo';
 import GeniusInfo from './container/GeniusInfo';
 import Register from './container/register';
-import Dashboard from './container/Dashboard';
+import Dashboard from './component/Dashboard';
 import reducers from './reducer';
 import './config';
+import './index.css'
+
 
 const store = createStore(reducers, compose(
     applyMiddleware(thunk),

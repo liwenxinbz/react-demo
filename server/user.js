@@ -12,10 +12,11 @@ const User = models.getModel('user');
 const _filter = {__v: 0, pwd: 0};
 
 Router.get('/list', function (req, res) {
-    // User.remove({}, function () {}); // 删除全部
-    User.find({}, function (err, doc) {
-        return res.json(doc);
-    })
+  const { type } = req.query
+  // User.remove({},function(e,d){})
+  User.find({type},function(err,doc){
+    return res.json({code:0,data:doc})
+  })
 });
 
 Router.post('/register', function (req, res) {
