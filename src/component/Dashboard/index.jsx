@@ -6,10 +6,7 @@ import {connect} from 'react-redux';
 import NavLinkBar from '../NavLinkBar';
 import Boss from '../../component/Boss';
 import Genius from '../../component/Genius';
-
-function User() {
-  return <h2>个人中心</h2>;
-}
+import User from '../../component/User';
 
 function Msg() {
   return <h2>消息列表</h2>;
