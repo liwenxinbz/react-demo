@@ -1,15 +1,35 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {List, WhiteSpace, Result} from 'antd-mobile';
+import {List, WhiteSpace, Result, Button, Modal} from 'antd-mobile';
+import browserCookies from 'browser-cookies';
+import {Redirect} from 'react-router-dom';
+import {logoutSubmit} from '../../redux/user.redux';
 
 
 @connect(
-  state => state
+  state => state.user,
+  {logoutSubmit}
 )
 class User extends React.Component {
 
+  logout = () => {
+    const alert = Modal.alert;
+
+    alert('注销', '确认退出登录吗？', [
+      {text: '取消', onPress: () => { console.log('取消'); }},
+      {text: '确认', onPress: () => {
+        browserCookies.erase('userid');
+        // window.location.href = window.location.href;
+        this.props.logoutSubmit();
+      }},
+    ])
+    // console.log('logout');
+    // browserCookies.erase('userid');
+    // window.location.href = window.location.href;
+
+  };
+
   render() {
-    console.log(this.props.user);
     const props = this.props;
     return props.user ? (
       <div>
@@ -22,14 +42,17 @@ class User extends React.Component {
           <List.Item>
             {props.title}
             {
-              this.props.desc.split('\n').map(item => {
+              this.props.desc && this.props.desc.split('\n').map(item => {
                 return <List.Item.Brief key={item}>{item}</List.Item.Brief>
               })
             }
           </List.Item>
+          <List.Item>
+            <Button onClick={this.logout}>退出登录</Button>
+          </List.Item>
         </List>
       </div>
-    ) : null;
+    ) :  <Redirect to={this.props.redirectTo}/>;
 
   }
 
