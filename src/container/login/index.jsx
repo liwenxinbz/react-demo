@@ -5,6 +5,28 @@ import {Redirect} from 'react-router-dom';
 import {login} from '../../redux/user.redux';
 import Logo from '../../component/Logo';
 
+function wrapperHello(Comp) {
+  class NewComp extends React.Component {
+      render() {
+          return (
+            <div>
+                <p>我是HOC高阶组件</p>
+                <Comp/>
+            </div>
+          );
+      }
+  }
+
+  return NewComp;
+}
+
+@wrapperHello
+class Hello extends React.Component {
+    render() {
+        return <div>hello react！</div>
+    }
+}
+
 
 @connect(
     state => state.user,
@@ -44,6 +66,7 @@ class Login extends React.Component {
                     ) : null
                 }
                 <Logo/>
+                <Hello/>
                 <h2>登录页面</h2>
                 {this.props.msg ? <p>{this.props.msg}</p> : null}
                 <WingBlank>
