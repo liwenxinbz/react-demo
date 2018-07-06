@@ -7,6 +7,7 @@ import {BrowserRouter, Route, Redirect, Switch} from 'react-router-dom';
 
 import Login from './container/login';
 import AuthRoute from './component/AuthRoute';
+import Chat from './component/Chat';
 import BossInfo from './container/BossInfo';
 import GeniusInfo from './container/GeniusInfo';
 import Register from './container/register';
@@ -36,7 +37,8 @@ ReactDom.render(
                         <Route path="/geniusinfo" component={GeniusInfo}/>
                         <Route path="/login" component={Login}/>
                         <Route path="/register" component={Register}/>
-                        <Route component={Dashboard}/>
+                        <Route path='/chat/:user' component={Chat}/>
+                      <Route component={Dashboard}/>
                     </Switch>
                 </div>
             </BrowserRouter>
